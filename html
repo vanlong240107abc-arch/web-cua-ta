@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Văn Long Social - Dịch vụ mạng xã hội</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0b1020;
+      color: white;
+    }
+    header {
+      padding: 22px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #151d32;
+    }
+    header h2 { color: #9275ff; }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 18px;
+    }
+    .hero {
+      padding: 75px 8%;
+      text-align: center;
+      background: linear-gradient(135deg, #35216e, #11182c);
+    }
+    .hero h1 { font-size: 42px; }
+    .hero p { color: #c4c9d8; line-height: 1.8; }
+    .btn {
+      display: inline-block;
+      padding: 13px 22px;
+      border-radius: 9px;
+      background: #7958ff;
+      color: white;
+      text-decoration: none;
+      border: 0;
+      cursor: pointer;
+    }
+    .services {
+      padding: 45px 8%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      padding: 25px;
+      background: #151d32;
+      border: 1px solid #303951;
+      border-radius: 15px;
+    }
+    .card h3 { color: #a994ff; }
+    .order {
+      max-width: 600px;
+      margin: 20px auto 60px;
+      padding: 25px;
+      background: #151d32;
+      border-radius: 15px;
+    }
+    input, select {
+      width: 100%;
+      padding: 13px;
+      margin: 8px 0 16px;
+      border: 1px solid #303951;
+      border-radius: 8px;
+      background: #0b1020;
+      color: white;
+    }
+    footer {
+      text-align: center;
+      padding: 25px;
+      background: #151d32;
+      color: #aab2c5;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h2>Văn Long Social</h2>
+    <nav>
+      <a href="#services">Dịch vụ</a>
+      <a href="#order">Đặt hàng</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>DỊCH VỤ TIKTOK & FACEBOOK</h1>
+    <p>Giải pháp quảng bá nội dung và phát triển mạng xã hội.</p>
+    <a href="#services" class="btn">Xem dịch vụ</a>
+  </section>
+
+  <section class="services" id="services">
+    <div class="card">
+      <h3>🎵 TikTok</h3>
+      <p>Tư vấn nội dung, tối ưu kênh và quảng bá video.</p>
+      <a href="#order" class="btn">Đặt dịch vụ</a>
+    </div>
+    <div class="card">
+      <h3>📘 Facebook</h3>
+      <p>Quảng bá bài viết, hỗ trợ Fanpage và tiếp cận khách hàng.</p>
+      <a href="#order" class="btn">Đặt dịch vụ</a>
+    </div>
+    <div class="card">
+      <h3>🚀 Marketing</h3>
+      <p>Tư vấn chiến lược phát triển thương hiệu trực tuyến.</p>
+      <a href="#order" class="btn">Đặt dịch vụ</a>
+    </div>
+  </section>
+
+  <section class="order" id="order">
+    <h2>Đặt dịch vụ ngay</h2>
+    <form id="orderForm">
+      <label>Nền tảng</label>
+      <select id="platform">
+        <option>TikTok</option>
+        <option>Facebook</option>
+      </select>
+
+      <label>Chọn dịch vụ</label>
+      <select id="service">
+        <option>Tư vấn nội dung - 99000</option>
+        <option>Quảng bá bài viết - 199000</option>
+        <option>Marketing - 299000</option>
+      </select>
+
+      <label>Link kênh hoặc bài viết</label>
+      <input id="link" type="url"
+        placeholder="https://..." required>
+
+      <label>Số điện thoại / Zalo</label>
+      <input id="phone" type="text"
+        placeholder="Nhập số liên hệ" required>
+
+      <button class="btn" type="submit">
+        Gửi yêu cầu
+      </button>
+      <p id="result"></p>
+    </form>
+  </section>
+
+  <footer>
+    © 2026 Văn Long Social | TikTok & Facebook
+  </footer>
+
+  <script>
+    document.getElementById("orderForm")
+      .addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const platform =
+          document.getElementById("platform").value;
+        const service =
+          document.getElementById("service").value;
+        const link =
+          document.getElementById("link").value;
+        const phone =
+          document.getElementById("phone").value;
+
+        const message =
+          `Nền tảng: ${platform}\n` +
+          `Dịch vụ: ${service}\n` +
+          `Link: ${link}\n` +
+          `Liên hệ: ${phone}`;
+
+        document.getElementById("result").textContent =
+          "Đã tạo nội dung đơn mẫu. Bấm nút bên dưới để sao chép.";
+
+        const copy = document.createElement("button");
+        copy.className = "btn";
+        copy.textContent = "Sao chép đơn hàng";
+        copy.type = "button";
+        copy.onclick = () => {
+          const area = document.createElement("textarea");
+          area.value = message;
+          document.body.appendChild(area);
+          area.select();
+          document.execCommand("copy");
+          area.remove();
+          copy.textContent = "Đã sao chép";
+        };
+        document.getElementById("result").after(copy);
+      });
+  </script>
+</body>
+</html>
